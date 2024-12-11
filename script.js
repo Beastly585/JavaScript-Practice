@@ -83,3 +83,95 @@ submitButton.addEventListener('click', () => {
 
 
 
+
+// Rock Paper Scissors
+
+let cpuMoveSet = ['paper', 'rock', 'scissors'];
+
+let userMove = '';
+
+let option = document.querySelectorAll('.option');
+
+option.forEach(element => {
+  element.addEventListener('click', (opt) => {
+    userMove = opt.target.textContent;
+
+    cpuMove = cpuMoveSet[Math.floor(Math.random() * 3)];
+
+    switch(userMove) {
+      case 'paper':
+        if (cpuMove === 'paper') {
+          console.log('retry');
+        } else if (cpuMove ==='rock'){
+          console.log('you win!');
+        } else if (cpuMove === 'scissors') {
+          console.log('try again, loser!')
+        }
+        break;
+      case 'rock':
+          if (cpuMove === 'paper') {
+            console.log('try again, loser!');
+          } else if (cpuMove ==='rock'){
+            console.log('retry');
+          } else if (cpuMove === 'scissors') {
+            console.log('you win!')
+          }
+      break;
+      case 'scissors':
+          if (cpuMove === 'rock') {
+            console.log('try again, loser!');
+          } else if (cpuMove ==='scissors'){
+            console.log('retry');
+          } else if (cpuMove === 'paper') {
+            console.log('you win!')
+          }
+      break;
+    }
+  })
+})
+
+
+
+// Training Days
+
+const activities = {
+  running: 30,
+  cycling: 40,
+  swimming: 50
+}
+
+const level = {
+  beginner: 1,
+  intermediate: 0.75,
+  expert: 0.25
+}
+
+function getTrainingDays(act, lev) {
+
+  if (act in activities && lev in level){
+    let requiredTraining = activities[act] * level[lev];
+    return 'You need ' + requiredTraining + ' days of training ' + act + ' at the ' + lev + ' level';
+  } else if (!(act in activities) || !(lev in level)) {
+    return 'Allowed activities: running, cycling, swimming \n Allowed levels: beginner, intermediate, expert.'
+  } 
+}
+
+console.log(getTrainingDays('running', 'intermediate'));
+
+
+// Secret Message Exercise - Arrays/Array Methods
+
+const mysteryQuote = ['courage', 'the', 'with', 'change', 'accept', 'to', 'things', 'I'];
+
+let removal = mysteryQuote.indexOf('accept');
+
+
+mysteryQuote.splice(removal, 1, 'understand', 'the');
+
+mysteryQuote.reverse();
+
+;
+
+
+console.log(mysteryQuote.join(' '));
+
