@@ -280,3 +280,43 @@ function vowelCounter(e) {
 }
 
 vowelCounter('uul3eudwaaaa')
+
+
+
+// Exercise: Sentence Validator
+
+// You are tasked with creating a function called isValidSentence that checks if a given sentence follows basic grammatical rules:
+
+// It must start with a capital letter.
+// It must end with a period (.).
+// Every word in the sentence must be a valid word (non-empty and alphabetic).
+// Instructions:
+
+// Write a function isValidSentence(sentence) that returns true if the sentence meets the rules listed above.
+// Use .every(), .startsWith(), and .endsWith() where appropriate.
+
+let sentence = "Fuck all this bullshit, Im learning."
+
+
+
+
+function isValidSentence(input) {
+  let string = 'string';
+  if (input[0] !== input[0].toUpperCase() || input[input.length - 1] !== '.') {
+    return false;
+  } 
+
+  return input.split(' ').every(word => 
+    word.type !== "string"
+  )
+
+
+  
+
+
+}
+
+console.log(isValidSentence(sentence))
+
+
+
