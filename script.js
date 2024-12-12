@@ -175,3 +175,108 @@ mysteryQuote.reverse();
 
 console.log(mysteryQuote.join(' '));
 
+
+//Birdsong Translator 
+
+// Rules
+// Only the vowels a, e, i, o, and u are stretched.
+// For each vowel in the input string:
+// Replace it with itself repeated 3 times.
+// For example, a becomes aaa, e becomes eee.
+// Ignore all other characters (non-vowels) but keep their positions intact.
+// Instructions
+// Write a function birdsongTranslator() that:
+// Takes a string as input.
+// Returns a string where all vowels are replaced as per the rules.
+// Test your function with a sentence of your choice.
+
+function birdSongTranslator(input) {
+  let vowels = ['a', 'e', 'i', 'o', 'u'];
+  let translated = '';
+  let vowel = '';
+  let consonant = '';
+
+  for(let i=0; i<input.length; i++) {
+    vowel = false;
+    for(let j=0; j<vowels.length; j++) {
+      
+      if(input[i] === vowels[j]) {
+        vowel = true;
+      } 
+    }
+    vowel ? translated += input[i].repeat(3) : translated += input[i];
+  }
+
+  console.log(translated)
+}
+
+birdSongTranslator('killer')
+
+
+
+// Exercise: Count Vowel Groups
+// Write a function countVowelGroups(input) that counts how many consecutive vowel groups (a sequence of vowels) appear in the input string.
+
+// For example:
+
+// Input: "hello", Output: 1 (because the only vowel group is "e")
+// Input: "aeiou", Output: 1 (one continuous vowel group)
+// Input: "abcde", Output: 1 (only "e" is a vowel)
+// Input: "apple", Output: 2 (the vowel groups are "a" and "e")
+// Guidelines:
+// A vowel group is a continuous sequence of vowels (e.g., "aei" is one group).
+// When a new vowel group starts, increase the count.
+// If a non-vowel is encountered, stop the current group and reset the flag that tracks whether you're in a group.
+
+
+function vowelCounter(e) {
+
+  let vowels = ['a', 'e', 'i', 'o', 'u'];
+  let flag = false;
+  let counter = 0;
+  let isVowel = [];
+
+
+  //figure out which letters are vowels
+
+  for(let i=0; i<e.length; i++) {
+    flag = false;
+
+      for(let j=0; j<vowels.length; j++) {
+        if(e[i] === vowels[j]){
+          flag = true;
+        } 
+      }
+
+      flag ? isVowel.push('yes') : isVowel.push('no');
+  }
+
+  // I have an array telling me which letter is a vowel
+
+  if (isVowel.every(value => value === "no")) {
+    counter = 0;
+    console.log(counter);
+    return;
+  }  
+  
+  if(isVowel.every(value => value === "yes")) {
+    counter = 1;
+    console.log(counter);
+    return;
+  } 
+  
+  for(let i=0; i<isVowel.length - 1; i++) {
+    if(isVowel[i] === "yes" && isVowel[i+1] === "yes" && i===0) {
+      counter = 1;
+    } else if(isVowel[i-1] === "no" && isVowel[i] === "yes" && isVowel[i+1] === "yes") {
+      counter++;
+    }
+
+      console.log(counter);
+
+  }
+
+  
+}
+
+vowelCounter('uul3eudwaaaa')
