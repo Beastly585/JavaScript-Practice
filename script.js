@@ -295,9 +295,7 @@ vowelCounter('uul3eudwaaaa')
 // Write a function isValidSentence(sentence) that returns true if the sentence meets the rules listed above.
 // Use .every(), .startsWith(), and .endsWith() where appropriate.
 
-let sentence = "Fuck all this bullshit, Im learning."
-
-
+let sentence = "Fuck all this bullshit, I am learning."
 
 
 function isValidSentence(input) {
@@ -309,14 +307,101 @@ function isValidSentence(input) {
   return input.split(' ').every(word => 
     word.type !== "string"
   )
-
-
-  
-
-
 }
 
 console.log(isValidSentence(sentence))
+
+
+
+
+// Exercise: Smoothie Maker
+// Create a program that generates a random smoothie from three categories of ingredients: fruits, liquids, and extras. Each ingredient has a name and a price.
+
+// Structure:
+
+// Use a smoothieMaker object.
+// Each category (fruits, liquids, extras) is represented as an array of objects with name and price.
+// Random Selection:
+
+// Create a method getRandomIngredient() that selects a random ingredient from a given array.
+// Smoothie Generation:
+
+// Add a generateSmoothie() method to randomly pick one ingredient from each category and return the smoothie details (name and total price).
+
+const smoothieMaker = {
+  _ingredients: {
+    fruits: [
+      {name: 'banana', price: 1},
+      {name: 'blueberry', price: 2},
+      {name: 'avocado', price: 3},
+      {name: 'spinach', price: 0.5}
+    ],
+
+    liquids: [
+      {name: 'milk', price: 2},
+      {name: 'alternative milk', price: 6},
+      {name: 'water', price: 0},
+      {name: 'coconut water', price: 3}
+    ],
+
+    extras: [
+      {name: 'protein powder', price: 5},
+      {name: 'chia seeds', price: 1},
+      {name: 'ginger', price: 0.2}
+    ]
+  },
+
+  get fruits() {
+    return this._ingredients.fruits;
+  },
+
+  get liquids() {
+    return this._ingredients.liquids;
+  },
+
+  get extras() {
+    return this._ingredients.extras;
+  },
+
+  set fruits(fruits) {
+    this._ingredients.fruits = fruits;
+  },
+  set liquids(liquids) {
+    this._ingredients.liquids = liquids;
+  },
+  set extras(extras) {
+    this._ingredients.extras = extras;
+  },
+
+  addIngredientToCategory(catName, ingredientName, ingredientPrice)  {
+    this._ingredients[catName].push({name: ingredientName, price: ingredientPrice})
+  },
+
+  getRandomIngredient(categoryName) {
+    const categoryArray = this._ingredients[categoryName];
+    const randomizer = Math.floor(Math.random() * categoryArray.length);
+
+    const randomIngredient = categoryArray[randomizer];
+    return randomIngredient;
+  },
+
+  generateSmoothie() {
+
+    const fruit = this.getRandomIngredient('fruits');
+    const liquid = this.getRandomIngredient('liquids');
+    const extra = this.getRandomIngredient('extras');
+
+    return `Your smoothie: ${fruit.name}, ${liquid.name}, and ${extra.name}. Total price is $${fruit.price + liquid.price + extra.price}`
+
+  }
+
+}
+
+console.log(smoothieMaker.generateSmoothie());
+
+
+
+
 
 
 
