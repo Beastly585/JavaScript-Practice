@@ -402,6 +402,130 @@ console.log(smoothieMaker.generateSmoothie());
 
 
 
+// Exercise: Book Collection
+// Create an object called bookCollection that stores information about a set of books. Each book should have a title, author, and price.
+
+// Properties:
+
+// The bookCollection object will have an array called books that holds book objects.
+// Each book object will have title, author, and price properties.
+// Methods:
+
+// Add a book: Create a method to add a new book to the collection.
+// Get total price: Create a method that calculates and returns the total price of all books in the collection.
+// Get average price: Create a getter that calculates and returns the average price of all books in the collection.
+
+let bookCollection = {
+  _bookList: {
+    book1: {
+      title: 'book1',
+      author: 'author',
+      price: 10
+    },
+
+    book2: {
+      title: 'book2',
+      author: 'author',
+      price: 30
+    }
+  },
+
+  //Create Factory Function
+  createBook(title, author, price) {
+    return {
+    title: title,
+    author: author,
+    price: price };
+  },
+
+  //Route Factory Function
+  addBook(bookName, title, author, price) {
+    const newBook = this.createBook(title, author, price);
+    this._bookList[bookName] = newBook;
+  },
 
 
+  get titles() {
+    let titleArray = [];
+    for(let book in this._bookList) {
+      titleArray.push(this._bookList[book].title);
+    }
+    return titleArray;
+  },
+
+  get prices() {
+    let priceArray = [];
+    for (let book in this._bookList) {
+      priceArray.push(this._bookList[book].price);  
+    }
+    return priceArray;
+  },
+
+  // Total cost method
+  totalCost() {
+    const priceArray = this.prices;
+    const titleArray = this.titles;
+    return `Your total cost for ${titleArray[0]} and ${titleArray[1]} ${priceArray.reduce((accumulator, currentValue) => accumulator + currentValue, 0)}`;
+  }
+
+}
+
+console.log(bookCollection.totalCost())
+
+
+
+
+
+
+//Last, self-practice. Writing out my favorite Broncos
+
+let broncos = {
+  _topAllTime: {
+    vonMiller: {
+      name: 'Von',
+      surname: 'Miller',
+      number: 58,
+      position: 'OLB',
+      rank: 2,
+    }
+  },
+
+  _candidates: {
+
+  },
+
+
+  generateAllTime(playerTitle, name, surname, number, position, rank) {
+    this._topAllTime[playerTitle] = {
+      name: name, 
+      surname: surname, 
+      number: number, 
+      position: position,
+      rank: rank,
+    }
+  },
+
+  generateCandidate(playerTitle, name, surname, number, position, rank) {
+    this._candidates[playerTitle] = {
+      name: name, 
+      surname: surname, 
+      number: number, 
+      position: position,
+      rank: rank,
+    }
+  },
+
+
+  get bestBroncos() {
+    let top5AllTime = [];
+    for(let playerTitle in this._topAllTime) {
+      if(this._topAllTime[playerTitle].rank <= 5) {
+        top5AllTime.push(this._topAllTime[playerTitle])
+      }  
+    }
+    return top5AllTime;
+  }
+
+
+}
 
