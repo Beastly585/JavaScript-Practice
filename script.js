@@ -612,6 +612,113 @@ let bookstore = {
   
 
 }
+// MOVIE LIBRARY EXAMPLE
+
+
+  // Properties
+  // Create a class CatalogItem to represent the base properties for all catalog items:
+
+  // title (string): The title of the movie or series.
+  // director (string): The director's name.
+  // releaseYear (number): The release year of the movie or series.
+  // rating (number): Average viewer rating (out of 10).
+
+  class CatalogItem {
+    constructor(title, director, releaseYear, rating) {
+      this.title = title;
+      this.director = director;
+      this.releaseYear = releaseYear;
+      this.rating = rating;
+    }
+
+    describe() {
+      let description = 
+        `${this.title} is a ${this.releaseYear} production directed by ${this.director}`;
+      return description;
+    }
+  }
 
 
 
+  // Create subclasses for specific types of movies or media:
+
+  // Movie - Adds the duration property (number, in minutes).
+  class Movie extends CatalogItem {
+    constructor(title, director, releaseYear, rating, duration) {
+      super(title, director, releaseYear, rating);
+      this.duration = duration;
+    }
+
+    describe() {
+      return `${super.describe()}. The movie is ${this.duration} minutes long.`
+    }
+  }
+  // Series - Adds the seasons property (number of seasons).
+
+  class Series extends CatalogItem {
+    constructor(title, director, releaseYear, rating, seasons) {
+      super(title, director, releaseYear, rating);
+      this.seasons = seasons;
+    }
+
+    describe() {
+      return `${super.describe()}. The series has ${this.seasons} seasons.`
+    }
+  }
+
+  class Catalog {
+    collection = [];
+
+    addItem(item) {
+      this.collection.push(item);
+    }
+
+    findByTitle(title) {
+      for(let i=0; i<this.collection.length; i++) {
+        if(this.collection[i].title === title) {
+          return this.collection[i];
+        } else {return 'Nothing found'}
+      }
+    }
+
+    getAverageRating() {
+      let array = [];
+      for(let i=0; i<this.collection.length; i++) {
+        array[i] = this.collection[i].rating;
+      }
+      let averageVal = (array.reduce((acc, val) => acc + val, 0)) / (array.length());
+      return averageVal;
+    }
+
+    listAllItems() {
+      return this.collection;
+    }
+  }
+
+
+  // Methods
+  // CatalogItem
+  // describe()
+  // Returns a string summarizing the catalog item's title, director, and release year.
+  // Movie
+  // Inherits describe() but adds the duration to the description.
+  // Series
+  // Overrides describe() to include the number of seasons.
+  // Catalog Class
+  // Create a Catalog class to manage the collection of movies and series.
+
+  // Properties
+  // collection: An array to store all CatalogItem objects.
+  // Methods
+  // addItem(item)
+
+  // Adds a movie or series object to the catalog.
+  // findByTitle(title)
+
+  // Searches the collection and returns the first item matching the provided title.
+  // getAverageRating()
+
+  // Calculates and returns the average rating of all items in the catalog.
+  // listAllItems()
+
+  // Logs each item's description to the console.
