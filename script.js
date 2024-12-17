@@ -525,7 +525,93 @@ let broncos = {
     }
     return top5AllTime;
   }
+}
 
+
+// Alternate Prompt: Bookstore Inventory Manager
+// Create an object called bookstore to manage a bookstore's inventory and sales.
+
+// Properties:
+// inventory: An array of book objects. Each book object should have:
+  // title (string)
+  // author (string)
+  // price (number)
+  // stock (number, representing the number of copies available)
+// sales: An object to track sales data:
+  // totalRevenue (number)
+  // booksSold (array of objects, each containing the book title and quantity sold)
+
+//   Methods:
+  // addBook(title, author, price, stock): Add a new book to the inventory.
+
+  // sellBook(title, quantity): Update the inventory and sales when a book is sold. Deduct the quantity sold from the stock. If the stock is insufficient, log an error message.
+
+  // getTotalRevenue(): Return the total revenue from all sales.
+
+  // getStockReport(): Return a report of the current stock levels for all books.
+
+  // getTopSellingBook(): Return the book with the highest sales by quantity. If no books have been sold yet, return a message indicating this.
+
+
+let bookstore = {
+  _inventory: [
+    {
+      title: 'Dune',
+      author: 'Frank Herbert',
+      price: 17.95,
+      stock: 23
+    },
+
+  ],
+
+  _sales: {
+    totalRevenue: 0,
+    booksSold: 0,
+  },
+
+  //Add a book to the inventory
+  addBook(title, author, price, stock) {
+    let newBook = {
+      title, 
+      author, 
+      price, 
+      stock
+    }
+    this._inventory.push(newBook)
+  },
+
+  sellBook(title, quantity) {
+    let currentEarnings = this._sales.totalRevenue;
+    let currentSold = this._sales.booksSold;
+    let stock = this._inventory.stock;
+
+    for(let i=0; i<this._inventory.length; i++) {
+      if(title === this._inventory[i].title && this._inventory[i].stock > quantity) {
+       this._inventory[i].stock -= quantity;
+       this._sales.booksSold += quantity;
+       this._sales.totalRevenue += this._inventory[i].price * quantity;
+      } else {alert(`Only ${this._inventory[i].stock} available`)}
+    }
+  },
+
+  get getTotalRevenue() {
+    return this._sales.totalRevenue
+  },
+
+  getStockReport() {
+    let stockArray = [];
+    for(let i=0; i<this._inventory.length; i++) {
+      stockArray[i] = this._inventory[i].stock;
+    }
+
+    let stockReport = stockArray.reduce((acc, val) => acc + val, 0) 
+    
+    return stockReport;
+  },
+
+  
 
 }
+
+
 
